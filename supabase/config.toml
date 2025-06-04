@@ -1,1 +1,6 @@
 project_id = "smyppttkzitjmakvohkx"
+
+[functions.create-google-calendar-event]
+# verify_jwt = true # Example: Set to true if you want to verify JWTs
+# import_map = "./supabase/functions/import_map.json" # Example: if you have an import map
+# entrypoint = "./supabase/functions/create-google-calendar-event/index.ts" # Default, not strictly needed if path matches function name
