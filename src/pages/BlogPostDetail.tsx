@@ -2,28 +2,25 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { useBlogPost } from '@/hooks/useBlogPost'; // Uses mock data
+import { useBlogPost } from '@/hooks/useBlogPost'; // Now uses Supabase
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, CalendarDays, UserCircle } from 'lucide-react'; // Added more icons
+import { ArrowLeft, CalendarDays, UserCircle } from 'lucide-react';
 
 /**
  * BlogPostDetail Page Component
  *
- * This page displays the full content of a single blog post.
- * The post identifier (slug or ID) is retrieved from the URL parameters.
- * Currently, it fetches and displays a mock blog post using the `useBlogPost` hook.
+ * This page displays the full content of a single blog post fetched from Supabase.
+ * The post slug is retrieved from the URL parameters.
+ * It uses the `useBlogPost` hook.
  *
  * TODO:
- * - When Wagtail API is integrated, `useBlogPost` will fetch real data.
  * - Ensure proper sanitization if `dangerouslySetInnerHTML` is used with real API data,
- *   or switch to a Markdown renderer if content is Markdown.
+ *   or switch to a Markdown renderer if content is Markdown from Supabase.
  * - Consider adding social sharing buttons.
- * - Display related posts or categories if applicable.
  */
 const BlogPostDetail: React.FC = () => {
-  // The route parameter is :postId, but we treat it as a generic identifier (slug or ID)
-  const { postId: postIdentifier } = useParams<{ postId: string }>();
-  const { data: post, isLoading, error } = useBlogPost(postIdentifier);
+  const { postId: postSlug } = useParams<{ postId: string }>(); // postId from route is treated as slug
+  const { data: post, isLoading, error } = useBlogPost(postSlug);
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
@@ -63,8 +60,9 @@ const BlogPostDetail: React.FC = () => {
                 <div className="flex flex-wrap items-center text-sm text-gray-500 space-x-4">
                   <div className="flex items-center">
                     <CalendarDays className="mr-1.5 h-4 w-4 text-claryon-teal" />
-                    <span>Published on {new Date(post.publishedDate).toLocaleDateString()}</span>
+                    <span>Published on {new Date(post.published_date).toLocaleDateString()}</span>
                   </div>
+                  {/* Use post.author (updated from post.author_name) */}
                   {post.author && (
                     <div className="flex items-center">
                       <UserCircle className="mr-1.5 h-4 w-4 text-claryon-teal" />
@@ -74,9 +72,9 @@ const BlogPostDetail: React.FC = () => {
                 </div>
               </header>
 
-              {post.imageUrl && (
+              {post.image_url && (
                 <img
-                  src={post.imageUrl}
+                  src={post.image_url}
                   alt={`Cover image for ${post.title}`}
                   className="w-full h-auto object-cover rounded-lg mb-8 shadow-md max-h-[450px]"
                 />
@@ -84,9 +82,10 @@ const BlogPostDetail: React.FC = () => {
 
               {/* Using "prose" class for Tailwind Typography plugin for nice article styling */}
               {/* Ensure Tailwind Typography plugin is installed and configured if you use this. */}
+              {/* TODO: Ensure post.content is sanitized if it's HTML, or use a Markdown renderer */}
               <div
                 className="prose prose-lg max-w-none text-gray-800 prose-headings:text-claryon-dark-gray prose-a:text-claryon-teal hover:prose-a:text-claryon-dark-teal"
-                dangerouslySetInnerHTML={{ __html: post.content }}
+                dangerouslySetInnerHTML={{ __html: post.content || "" }}
               />
             </article>
           )}

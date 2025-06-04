@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-// import { supabase } from '@/integrations/supabase/client'; // Supabase query commented out
+import { supabase } from '@/integrations/supabase/client';
 
 export interface Testimonial {
   id: string;
@@ -7,93 +7,57 @@ export interface Testimonial {
   quote: string;
   service_availed: string | null;
   rating: number | null;
-  date_received: string | null; // Should be an ISO date string ideally
+  date_received: string | null; // Should ideally be a full ISO timestamp if time is relevant for ordering
+  status?: string;
 }
 
-// ############################################################################
-// MOCK DATA IMPLEMENTATION FOR TESTIMONIALS
-// This hook currently returns a static list of mock testimonials.
-// The original Supabase query has been commented out below.
-//
-// TODO: Replace this mock implementation with actual data fetching
-// from the Wagtail API once it's available for testimonials.
-// ############################################################################
-
-const mockTestimonials: Testimonial[] = [
-  {
-    id: "1",
-    client_name: "John Doe",
-    quote: "Claryon Group provided outstanding legal advice for my immigration case. Highly recommended!",
-    service_availed: "Legal Services - Immigration",
-    rating: 5,
-    date_received: "2023-10-15T00:00:00Z", // Example ISO date
-  },
-  {
-    id: "2",
-    client_name: "Jane Smith",
-    quote: "The HR recruitment services were top-notch. They found us the perfect candidate in record time.",
-    service_availed: "HR Services - Recruitment",
-    rating: 5,
-    date_received: "2023-11-01T00:00:00Z", // Example ISO date
-  },
-  {
-    id: "3",
-    client_name: "Alice Brown",
-    quote: "Thanks to their education consulting, my son got into his dream university. The visa assistance was invaluable.",
-    service_availed: "Education Consulting - Visa Assistance",
-    rating: 4,
-    date_received: "2023-09-20T00:00:00Z", // Example ISO date
-  },
-];
-
 /**
- * Hook to fetch a list of testimonials.
- * Currently returns mock data.
+ * Hook to fetch a list of published testimonials from Supabase.
  *
- * @returns {object} An object containing:
- *  - `data`: An array of Testimonial objects or undefined if loading or error.
- *  - `isLoading`: Boolean indicating if data is being fetched.
- *  - `error`: Error object if fetching failed.
+ * This hook queries the 'testimonials' table for records that meet the following criteria:
+ * - Their 'status' column is 'published'.
+ * The results are ordered by 'date_received' in descending order, showing the most recent testimonials first.
+ * If 'date_received' can be null, records with null dates are placed last.
+ *
+ * @returns {object} A TanStack Query object containing:
+ *  - `data`: An array of Testimonial objects if successful, otherwise undefined.
+ *  - `isLoading`: Boolean, true while the data is being fetched.
+ *  - `error`: Error object if the fetch operation fails.
  */
 export const useTestimonials = () => {
-  // Simulate react-query structure with mock data
   return useQuery<Testimonial[], Error>({
-    queryKey: ['testimonials'], // React Query key for caching
+    queryKey: ['testimonials'], // Unique key for this query
     queryFn: async () => {
-      // Simulate API delay
-      await new Promise(resolve => setTimeout(resolve, 500));
-      console.log("useTestimonials: Returning MOCK testimonials.");
-      return mockTestimonials;
-      // TODO: Replace with actual API call to Wagtail for testimonials
-      // Example:
-      // const response = await fetch('/api/wagtail/pages/?type=testimonials.TestimonialPage&fields=*'); // Adjust type and fields
-      // if (!response.ok) throw new Error('Failed to fetch testimonials');
-      // const data = await response.json();
-      // return data.items.map(item => ({...item, id: item.id.toString()})); // Adapt Wagtail data structure
-    },
-    // staleTime: Infinity, // Can be useful for mock data to prevent refetching
-  });
-
-  /*
-  // ############################################################################
-  // ORIGINAL SUPABASE QUERY (Commented out for Wagtail integration prep)
-  // ############################################################################
-  return useQuery({
-    queryKey: ['testimonials'],
-    queryFn: async () => {
+      // Construct the Supabase query
       const { data, error } = await supabase
-        .from('testimonials')
-        .select('*')
-        .eq('is_published', true)
-        .order('created_at', { ascending: false });
+        .from('testimonials') // Target the 'testimonials' table
+        .select(`
+          id,
+          client_name,
+          quote,
+          service_availed,
+          date_received,
+          status,
+          rating
+        `) // Select specified columns
+        .eq('status', 'published') // Filter for testimonials with status 'published'
+        // Order by date_received, most recent first.
+        // 'nullsFirst: false' places null dates at the end if ascending is false.
+        .order('date_received', { ascending: false, nullsFirst: false });
 
       if (error) {
+        // Log the error and re-throw to be handled by React Query
         console.error('Error fetching testimonials from Supabase:', error);
-        throw error;
+        throw new Error(error.message || 'Failed to fetch testimonials from Supabase.');
       }
 
+      // Data from Supabase should directly map to the Testimonial[] type,
+      // assuming table column names match the interface fields.
       return data as Testimonial[];
     },
+    staleTime: 1000 * 60 * 10, // Cache data for 10 minutes
   });
-  */
 };
+
+// Previous mock data and Supabase v1 style comments have been removed.
+// The hook is now directly using Supabase with TanStack Query v4/v5 patterns.

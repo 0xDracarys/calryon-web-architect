@@ -7,8 +7,8 @@ import ServiceCard from '@/components/ServiceCard';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Scale, Users, GraduationCap, TrendingUp, Quote, Newspaper } from 'lucide-react';
-import { useTestimonials } from '@/hooks/useTestimonials'; // Mock data hook
-import { useBlogPosts } from '@/hooks/useBlogPosts';     // Mock data hook
+import { useTestimonials } from '@/hooks/useTestimonials'; // Mock data hook (for now)
+import { useBlogPosts } from '@/hooks/useBlogPosts';     // Now uses Supabase
 
 /**
  * Index Page Component (Homepage)
@@ -17,17 +17,16 @@ import { useBlogPosts } from '@/hooks/useBlogPosts';     // Mock data hook
  * It provides an overview of services, introduces the company,
  * and features previews of dynamic content like blog posts and testimonials.
  *
- * Currently, the "Latest Insights" (blog posts) and "Client Success Stories" (testimonials)
- * sections are populated using hooks that return mock data (`useBlogPosts` and `useTestimonials`).
+ * Blog posts are fetched from Supabase. Testimonials currently use mock data.
  *
  * TODO:
- * - Once Wagtail API is integrated, these hooks will be updated to fetch real data.
- * - The content for sections like "Why Choose Us?" might also be made dynamic via Wagtail.
+ * - Update `useTestimonials` to fetch from Supabase or Wagtail.
+ * - The content for sections like "Why Choose Us?" might also be made dynamic.
  */
 const Index = () => {
   // Fetch testimonials (currently mock data)
   const { data: testimonials, isLoading: testimonialsLoading, error: testimonialsError } = useTestimonials();
-  // Fetch blog posts (currently mock data)
+  // Fetch blog posts (from Supabase)
   const { data: blogPosts, isLoading: blogPostsLoading, error: blogPostsError } = useBlogPosts();
 
   // Static data for core services - could be made dynamic from Wagtail if needed
@@ -105,7 +104,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Blog Preview Section - Populated by mock data from useBlogPosts */}
+      {/* Blog Preview Section - Populated by Supabase data from useBlogPosts */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -120,9 +119,9 @@ const Index = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {previewBlogPosts.map((post) => (
                 <Card key={post.id} className="flex flex-col bg-white shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg overflow-hidden">
-                   {post.imageUrl && (
+                   {post.image_url && (
                     <Link to={`/blog/${post.slug}`} className="block aspect-video overflow-hidden">
-                      <img src={post.imageUrl} alt={post.title} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
+                      <img src={post.image_url} alt={post.title} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
                     </Link>
                   )}
                   <CardHeader className="pb-3">
@@ -130,8 +129,9 @@ const Index = () => {
                       <Link to={`/blog/${post.slug}`}>{post.title}</Link>
                     </CardTitle>
                      <p className="text-xs text-gray-500 pt-1">
+                      {/* Use post.author (updated from post.author_name) */}
                       {post.author && `By ${post.author} • `}
-                      {new Date(post.publishedDate).toLocaleDateString()}
+                      {new Date(post.published_date).toLocaleDateString()}
                     </p>
                   </CardHeader>
                   <CardContent className="flex-grow text-sm">
