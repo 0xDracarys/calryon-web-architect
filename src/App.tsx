@@ -9,9 +9,6 @@ import About from "./pages/About";
 import Services from "./pages/Services";
 import Contact from "./pages/Contact";
 import BookAppointment from "./pages/BookAppointment";
-import TestimonialsPage from "./pages/TestimonialsPage"; // Added import
-import BlogIndexPage from "./pages/BlogIndexPage"; // Added import
-import BlogPostDetailPage from "./pages/BlogPostDetailPage"; // Added import
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,9 +25,6 @@ const App = () => (
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/book-appointment" element={<BookAppointment />} />
-          <Route path="/testimonials" element={<TestimonialsPage />} /> {/* Added route */}
-          <Route path="/blog" element={<BlogIndexPage />} /> {/* Added route */}
-          <Route path="/blog/:postId" element={<BlogPostDetailPage />} /> {/* Added route */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

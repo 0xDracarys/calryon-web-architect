@@ -52,7 +52,7 @@ const BookAppointment = () => {
       // Combine date and time into a single datetime
       const preferredDateTime = new Date(`${formData.preferredDate}T${formData.preferredTime}:00`);
 
-      const { data: newAppointment, error } = await supabase
+      const { error } = await supabase
         .from('appointments')
         .insert({
           client_name: formData.clientName,
@@ -62,9 +62,7 @@ const BookAppointment = () => {
           preferred_datetime: preferredDateTime.toISOString(),
           notes: formData.notes || null,
           status: 'pending_confirmation'
-        })
-        .select('id')
-        .single();
+        });
 
       if (error) {
         console.error('Error booking appointment:', error);
@@ -78,35 +76,6 @@ const BookAppointment = () => {
           title: "Appointment Booked!",
           description: "Your appointment request has been submitted. We'll confirm your booking within 24 hours.",
         });
-
-        if (newAppointment && newAppointment.id) {
-          console.log('Appointment created with ID:', newAppointment.id);
-          // Invoke the Edge Function
-          const { data: functionResponse, error: functionError } = await supabase.functions.invoke(
-            'create-google-calendar-event',
-            { body: { appointmentId: newAppointment.id } }
-          );
-
-          if (functionError) {
-            console.error('Error calling Edge Function:', functionError);
-            // Optionally, show a toast for calendar sync failure, but primary booking is done.
-            // toast({
-            //   title: "Calendar Sync Pending",
-            //   description: "Your appointment is booked, but we couldn't sync it to Google Calendar immediately. We'll try again.",
-            //   variant: "default", // Or a custom variant
-            // });
-          } else {
-            console.log('Edge Function response:', functionResponse);
-            // Optionally, update UI or show a specific success toast for calendar sync
-            // toast({
-            //   title: "Calendar Event Created",
-            //   description: "Your appointment has been added to Google Calendar.",
-            //   variant: "success",
-            // });
-          }
-        } else {
-          console.warn('New appointment data or ID is missing, skipping calendar event creation.');
-        }
         
         // Reset form
         setFormData({
