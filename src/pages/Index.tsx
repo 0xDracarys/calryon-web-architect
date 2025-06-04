@@ -6,8 +6,11 @@ import CTAButton from '@/components/CTAButton';
 import ServiceCard from '@/components/ServiceCard';
 import { Card, CardContent } from '@/components/ui/card';
 import { Scale, Users, GraduationCap, TrendingUp, Quote } from 'lucide-react';
+import { useTestimonials } from '@/hooks/useTestimonials';
 
 const Index = () => {
+  const { data: testimonials, isLoading: testimonialsLoading } = useTestimonials();
+
   const services = [
     {
       title: "Legal Services",
@@ -59,23 +62,29 @@ const Index = () => {
     }
   ];
 
-  const testimonials = [
+  // Fallback testimonials if no data from database
+  const fallbackTestimonials = [
     {
-      name: "Maria S.",
-      service: "Legal Services",
+      id: '1',
+      client_name: "Maria S.",
+      service_availed: "Legal Services",
       quote: "Claryon Group helped me navigate the complex immigration process with expertise and care. Their team made what seemed impossible, possible."
     },
     {
-      name: "James L.",
-      service: "Business Consulting",
+      id: '2',
+      client_name: "James L.",
+      service_availed: "Business Consulting",
       quote: "The strategic guidance from Claryon Group was instrumental in our successful European market expansion. Highly recommended."
     },
     {
-      name: "Anna K.",
-      service: "Education Consulting",
+      id: '3',
+      client_name: "Anna K.",
+      service_availed: "Education Consulting",
       quote: "Thanks to their support, I secured admission to my dream university in Germany. The process was smooth and stress-free."
     }
   ];
+
+  const displayTestimonials = testimonials && testimonials.length > 0 ? testimonials.slice(0, 3) : fallbackTestimonials;
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -172,20 +181,40 @@ const Index = () => {
               Hear from our satisfied clients who have achieved their goals with our expert guidance.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <Card key={index} className="h-full border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <CardContent className="p-6">
-                  <Quote className="h-8 w-8 text-claryon-teal mb-4" />
-                  <p className="text-gray-700 mb-4 italic">"{testimonial.quote}"</p>
-                  <div className="border-t border-gray-100 pt-4">
-                    <p className="font-semibold text-claryon-gray">{testimonial.name}</p>
-                    <p className="text-sm text-claryon-teal">{testimonial.service}</p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          {testimonialsLoading ? (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[1, 2, 3].map((i) => (
+                <Card key={i} className="h-full border-0 shadow-lg animate-pulse">
+                  <CardContent className="p-6">
+                    <div className="h-8 w-8 bg-gray-300 rounded mb-4"></div>
+                    <div className="space-y-2 mb-4">
+                      <div className="h-4 bg-gray-300 rounded"></div>
+                      <div className="h-4 bg-gray-300 rounded w-3/4"></div>
+                    </div>
+                    <div className="border-t border-gray-100 pt-4">
+                      <div className="h-4 bg-gray-300 rounded w-1/2 mb-2"></div>
+                      <div className="h-3 bg-gray-300 rounded w-1/3"></div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {displayTestimonials.map((testimonial) => (
+                <Card key={testimonial.id} className="h-full border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                  <CardContent className="p-6">
+                    <Quote className="h-8 w-8 text-claryon-teal mb-4" />
+                    <p className="text-gray-700 mb-4 italic">"{testimonial.quote}"</p>
+                    <div className="border-t border-gray-100 pt-4">
+                      <p className="font-semibold text-claryon-gray">{testimonial.client_name}</p>
+                      <p className="text-sm text-claryon-teal">{testimonial.service_availed}</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          )}
           <div className="text-center mt-12">
             <CTAButton to="/testimonials" variant="outline">
               View All Testimonials

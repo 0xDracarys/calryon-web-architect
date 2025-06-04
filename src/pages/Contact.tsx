@@ -10,9 +10,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Label } from '@/components/ui/label';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 
 const Contact = () => {
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -21,24 +23,53 @@ const Contact = () => {
     message: ''
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Contact form submitted:', formData);
-    
-    // Placeholder for form submission logic
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for your inquiry. We'll get back to you within 24 hours.",
-    });
-    
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      service: '',
-      message: ''
-    });
+    setIsSubmitting(true);
+
+    try {
+      const { error } = await supabase
+        .from('contact_submissions')
+        .insert({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone || null,
+          service_of_interest: formData.service || null,
+          message: formData.message
+        });
+
+      if (error) {
+        console.error('Error submitting contact form:', error);
+        toast({
+          title: "Error",
+          description: "There was an issue sending your message. Please try again.",
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Message Sent!",
+          description: "Thank you for your inquiry. We'll get back to you within 24 hours.",
+        });
+        
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          service: '',
+          message: ''
+        });
+      }
+    } catch (error) {
+      console.error('Unexpected error:', error);
+      toast({
+        title: "Error",
+        description: "An unexpected error occurred. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleInputChange = (field: string, value: string) => {
@@ -87,6 +118,7 @@ const Contact = () => {
                           onChange={(e) => handleInputChange('name', e.target.value)}
                           required
                           className="mt-1"
+                          disabled={isSubmitting}
                         />
                       </div>
                       <div>
@@ -98,6 +130,7 @@ const Contact = () => {
                           onChange={(e) => handleInputChange('email', e.target.value)}
                           required
                           className="mt-1"
+                          disabled={isSubmitting}
                         />
                       </div>
                     </div>
@@ -111,11 +144,16 @@ const Contact = () => {
                           value={formData.phone}
                           onChange={(e) => handleInputChange('phone', e.target.value)}
                           className="mt-1"
+                          disabled={isSubmitting}
                         />
                       </div>
                       <div>
                         <Label htmlFor="service">Service of Interest</Label>
-                        <Select value={formData.service} onValueChange={(value) => handleInputChange('service', value)}>
+                        <Select 
+                          value={formData.service} 
+                          onValueChange={(value) => handleInputChange('service', value)}
+                          disabled={isSubmitting}
+                        >
                           <SelectTrigger className="mt-1">
                             <SelectValue placeholder="Select a service" />
                           </SelectTrigger>
@@ -140,11 +178,16 @@ const Contact = () => {
                         placeholder="Please describe your needs and how we can help you..."
                         required
                         className="mt-1 min-h-[120px]"
+                        disabled={isSubmitting}
                       />
                     </div>
 
-                    <Button type="submit" className="w-full bg-claryon-teal hover:bg-claryon-teal/90">
-                      Send Message
+                    <Button 
+                      type="submit" 
+                      className="w-full bg-claryon-teal hover:bg-claryon-teal/90"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? 'Sending...' : 'Send Message'}
                     </Button>
                   </form>
                 </CardContent>

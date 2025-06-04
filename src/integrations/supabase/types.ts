@@ -9,7 +9,162 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      appointments: {
+        Row: {
+          client_email: string
+          client_name: string
+          client_phone: string | null
+          coach_id: string | null
+          created_at: string
+          google_calendar_event_id: string | null
+          id: string
+          notes: string | null
+          preferred_datetime: string
+          service_name: string
+          status: string
+        }
+        Insert: {
+          client_email: string
+          client_name: string
+          client_phone?: string | null
+          coach_id?: string | null
+          created_at?: string
+          google_calendar_event_id?: string | null
+          id?: string
+          notes?: string | null
+          preferred_datetime: string
+          service_name: string
+          status?: string
+        }
+        Update: {
+          client_email?: string
+          client_name?: string
+          client_phone?: string | null
+          coach_id?: string | null
+          created_at?: string
+          google_calendar_event_id?: string | null
+          id?: string
+          notes?: string | null
+          preferred_datetime?: string
+          service_name?: string
+          status?: string
+        }
+        Relationships: []
+      }
+      blog_posts: {
+        Row: {
+          author_name: string | null
+          body_content: Json | null
+          body_content_type: string | null
+          created_at: string
+          hero_image_url: string | null
+          id: string
+          introduction: string | null
+          publication_date: string | null
+          slug: string
+          status: string
+          tags: string[] | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          author_name?: string | null
+          body_content?: Json | null
+          body_content_type?: string | null
+          created_at?: string
+          hero_image_url?: string | null
+          id?: string
+          introduction?: string | null
+          publication_date?: string | null
+          slug: string
+          status?: string
+          tags?: string[] | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          author_name?: string | null
+          body_content?: Json | null
+          body_content_type?: string | null
+          created_at?: string
+          hero_image_url?: string | null
+          id?: string
+          introduction?: string | null
+          publication_date?: string | null
+          slug?: string
+          status?: string
+          tags?: string[] | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      contact_submissions: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          is_read: boolean | null
+          message: string
+          name: string
+          phone: string | null
+          service_of_interest: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          is_read?: boolean | null
+          message: string
+          name: string
+          phone?: string | null
+          service_of_interest?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          is_read?: boolean | null
+          message?: string
+          name?: string
+          phone?: string | null
+          service_of_interest?: string | null
+        }
+        Relationships: []
+      }
+      testimonials: {
+        Row: {
+          client_name: string
+          created_at: string
+          date_received: string | null
+          id: string
+          is_published: boolean
+          quote: string
+          rating: number | null
+          service_availed: string | null
+        }
+        Insert: {
+          client_name: string
+          created_at?: string
+          date_received?: string | null
+          id?: string
+          is_published?: boolean
+          quote: string
+          rating?: number | null
+          service_availed?: string | null
+        }
+        Update: {
+          client_name?: string
+          created_at?: string
+          date_received?: string | null
+          id?: string
+          is_published?: boolean
+          quote?: string
+          rating?: number | null
+          service_availed?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

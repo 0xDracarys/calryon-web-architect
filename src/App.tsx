@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import About from "./pages/About";
 import Services from "./pages/Services";
 import Contact from "./pages/Contact";
+import BookAppointment from "./pages/BookAppointment";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,18 +24,7 @@ const App = () => (
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />
-          {/* Service-specific routes - placeholders for future implementation */}
-          <Route path="/services/legal" element={<Services />} />
-          <Route path="/services/hr" element={<Services />} />
-          <Route path="/services/education" element={<Services />} />
-          <Route path="/services/business" element={<Services />} />
-          {/* Additional pages - placeholders for future implementation */}
-          <Route path="/blog" element={<NotFound />} />
-          <Route path="/testimonials" element={<NotFound />} />
-          <Route path="/book-appointment" element={<NotFound />} />
-          <Route path="/privacy-policy" element={<NotFound />} />
-          <Route path="/terms" element={<NotFound />} />
-          {/* Catch-all route */}
+          <Route path="/book-appointment" element={<BookAppointment />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
