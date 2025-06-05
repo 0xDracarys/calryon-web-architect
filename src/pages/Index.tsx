@@ -7,7 +7,7 @@ import ServiceCard from '@/components/ServiceCard';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Scale, Users, GraduationCap, TrendingUp, Quote, Newspaper } from 'lucide-react';
-import { useTestimonials } from '@/hooks/useTestimonials'; // Mock data hook (for now)
+import { useTestimonials } from '@/hooks/useTestimonials'; // Now uses Supabase
 import { useBlogPosts } from '@/hooks/useBlogPosts';     // Now uses Supabase
 
 /**
@@ -17,14 +17,13 @@ import { useBlogPosts } from '@/hooks/useBlogPosts';     // Now uses Supabase
  * It provides an overview of services, introduces the company,
  * and features previews of dynamic content like blog posts and testimonials.
  *
- * Blog posts are fetched from Supabase. Testimonials currently use mock data.
+ * Blog posts and Testimonials are fetched from Supabase.
  *
  * TODO:
- * - Update `useTestimonials` to fetch from Supabase or Wagtail.
- * - The content for sections like "Why Choose Us?" might also be made dynamic.
+ * - The content for sections like "Why Choose Us?" might also be made dynamic via Wagtail or Supabase.
  */
 const Index = () => {
-  // Fetch testimonials (currently mock data)
+  // Fetch testimonials (from Supabase)
   const { data: testimonials, isLoading: testimonialsLoading, error: testimonialsError } = useTestimonials();
   // Fetch blog posts (from Supabase)
   const { data: blogPosts, isLoading: blogPostsLoading, error: blogPostsError } = useBlogPosts();
@@ -119,9 +118,9 @@ const Index = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {previewBlogPosts.map((post) => (
                 <Card key={post.id} className="flex flex-col bg-white shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg overflow-hidden">
-                   {post.image_url && (
+                   {post.hero_image_url && (
                     <Link to={`/blog/${post.slug}`} className="block aspect-video overflow-hidden">
-                      <img src={post.image_url} alt={post.title} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
+                      <img src={post.hero_image_url} alt={post.title} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
                     </Link>
                   )}
                   <CardHeader className="pb-3">
@@ -129,13 +128,12 @@ const Index = () => {
                       <Link to={`/blog/${post.slug}`}>{post.title}</Link>
                     </CardTitle>
                      <p className="text-xs text-gray-500 pt-1">
-                      {/* Use post.author (updated from post.author_name) */}
-                      {post.author && `By ${post.author} • `}
-                      {new Date(post.published_date).toLocaleDateString()}
+                      {post.author_name && `By ${post.author_name} • `}
+                      {post.publication_date && new Date(post.publication_date).toLocaleDateString()}
                     </p>
                   </CardHeader>
                   <CardContent className="flex-grow text-sm">
-                    <p className="text-gray-700 line-clamp-3">{post.summary}</p>
+                    <p className="text-gray-700 line-clamp-3">{post.introduction}</p>
                   </CardContent>
                   <CardFooter className="pt-3">
                     <Button asChild variant="link" className="text-claryon-teal hover:text-claryon-dark-teal p-0 text-sm">
@@ -165,7 +163,6 @@ const Index = () => {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* These could also be made dynamic from Wagtail if desired */}
             <div className="text-center p-6 border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow">
               <div className="w-16 h-16 bg-claryon-teal rounded-full flex items-center justify-center mx-auto mb-4">
                 <Scale className="h-8 w-8 text-white" />
@@ -191,7 +188,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Testimonials Section - Populated by mock data from useTestimonials */}
+      {/* Testimonials Section - Populated by Supabase data from useTestimonials */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -205,7 +202,7 @@ const Index = () => {
               {[1, 2, 3].map((i) => (
                 <Card key={i} className="h-full border-0 shadow-lg animate-pulse bg-white p-6 rounded-lg">
                   <div className="flex flex-col items-center text-center">
-                    <div className="h-10 w-10 bg-gray-300 rounded-full mb-4"></div> {/* Icon placeholder */}
+                    <div className="h-10 w-10 bg-gray-300 rounded-full mb-4"></div>
                     <div className="space-y-3 mb-4 w-full">
                       <div className="h-4 bg-gray-300 rounded w-full"></div>
                       <div className="h-4 bg-gray-300 rounded w-5/6 mx-auto"></div>

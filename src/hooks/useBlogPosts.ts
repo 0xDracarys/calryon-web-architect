@@ -7,8 +7,8 @@ import { supabase } from '@/integrations/supabase/client';
  *
  * This hook queries the 'blog_posts' table for records that meet the following criteria:
  * - Their 'status' column is 'published'.
- * - Their 'published_date' is not in the future (i.e., less than or equal to the current time).
- * The results are ordered by 'published_date' in descending order, showing the most recent posts first.
+ * - Their 'publication_date' is not null and not in the future (i.e., less than or equal to the current time).
+ * The results are ordered by 'publication_date' in descending order, showing the most recent posts first.
  *
  * @returns {object} A TanStack Query object containing:
  *  - `data`: An array of Post objects if successful, otherwise undefined.
@@ -19,24 +19,29 @@ export const useBlogPosts = () => {
   return useQuery<Post[], Error>({
     queryKey: ['blogPosts'], // Unique key for this query for caching and refetching
     queryFn: async () => {
-      const todayISO = new Date().toISOString(); // Get current time in ISO format for comparison
+      const today = new Date().toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format
 
       // Construct the Supabase query
       const { data, error } = await supabase
         .from('blog_posts') // Target the 'blog_posts' table
         .select(`
           id,
+          created_at,
+          updated_at,
           title,
           slug,
-          summary,
-          published_date,
-          author,        // Assumes 'author' column exists and matches Post.author type
-          image_url,
+          publication_date,
+          introduction,     insectesad of summary
+          hero_image_url,  instead of image_url
+          author_name,     instead of author
+          tags,
           status
-        `) // Select specified columns
-        .eq('status', 'published') // Filter for posts with status 'published'
-        .lte('published_date', todayISO) // Filter for posts with published_date up to or including today
-        .order('published_date', { ascending: false }); // Order by most recent published_date
+        `) // Select columns aligned with the Post interface for list view
+           // Omitting body_content and body_content_type for list view brevity
+        .eq('status', 'published')        // Filter for posts with status 'published'
+        .not('publication_date', 'is', null) // Ensure publication_date is not null
+        .lte('publication_date', today)   // Filter for posts with publication_date up to or including today
+        .order('publication_date', { ascending: false }); // Order by most recent publication_date
 
       if (error) {
         // Log the error and re-throw to be caught by React Query
@@ -44,10 +49,8 @@ export const useBlogPosts = () => {
         throw new Error(error.message || 'Failed to fetch blog posts from Supabase.');
       }
 
-      // Data from Supabase should directly map to the Post[] type if:
-      // 1. Selected column names match the Post interface fields (or are aliased in the select).
-      // 2. Data types returned by Supabase are compatible with the Post interface field types.
-      // The 'author' field is assumed to be a text column in Supabase matching Post.author.
+      // Data from Supabase should directly map to the Post[] type.
+      // The `Post` interface fields are named to match Supabase snake_case columns.
       return data as Post[];
     },
     staleTime: 1000 * 60 * 5, // Cache data for 5 minutes to reduce redundant fetches

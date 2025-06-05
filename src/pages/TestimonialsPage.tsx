@@ -1,20 +1,20 @@
 import React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { useTestimonials, Testimonial } from '@/hooks/useTestimonials'; // Uses mock data
+import { useTestimonials } from '@/hooks/useTestimonials'; // Now uses Supabase
+import type { Testimonial } from '@/types/testimonials'; // Import type for clarity
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
-import { Star, Quote as QuoteIcon } from 'lucide-react'; // Added QuoteIcon
+import { Star, Quote as QuoteIcon } from 'lucide-react';
 
 /**
  * TestimonialsPage Component
  *
- * This page is dedicated to showcasing client testimonials.
- * It currently uses the `useTestimonials` hook which provides mock data.
+ * This page is dedicated to showcasing client testimonials fetched from Supabase
+ * using the `useTestimonials` hook.
  *
  * TODO:
- * - When Wagtail API is integrated, `useTestimonials` will fetch real testimonials.
- * - Consider adding filtering options (e.g., by service type) if applicable.
- * - The design might be enhanced to make testimonials more visually engaging.
+ * - Consider adding filtering options (e.g., by service type, rating) if applicable.
+ * - The design might be further enhanced to make testimonials more visually engaging.
  */
 const TestimonialsPage: React.FC = () => {
   const { data: testimonials, isLoading, error } = useTestimonials();
@@ -53,7 +53,7 @@ const TestimonialsPage: React.FC = () => {
               <Card key={testimonial.id} className="flex flex-col bg-white shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg overflow-hidden">
                 <CardHeader className="pb-4 bg-claryon-teal/5 p-6">
                   <CardTitle className="font-playfair text-xl text-claryon-gray">{testimonial.client_name}</CardTitle>
-                  {testimonial.rating && (
+                  {testimonial.rating !== null && typeof testimonial.rating === 'number' && (
                     <div className="flex items-center mt-1">
                       {Array.from({ length: 5 }, (_, i) => (
                         <Star

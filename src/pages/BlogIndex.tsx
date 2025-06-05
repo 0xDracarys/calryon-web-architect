@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { useBlogPosts } from '@/hooks/useBlogPosts'; // Now uses Supabase
+import { useBlogPosts } from '@/hooks/useBlogPosts'; // Now uses Supabase with updated Post type
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
@@ -14,7 +14,7 @@ import { Button } from '@/components/ui/button';
  *
  * TODO:
  * - Consider adding pagination if the number of blog posts grows significantly.
- * - Potentially add filtering or categorization options.
+ * - Potentially add filtering or categorization options by 'tags'.
  */
 const BlogIndex: React.FC = () => {
   const { data: posts, isLoading, error } = useBlogPosts();
@@ -49,10 +49,11 @@ const BlogIndex: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {posts.map((post) => (
               <Card key={post.id} className="flex flex-col shadow-lg hover:shadow-xl transition-shadow duration-300 bg-white">
-                {post.image_url && (
+                {/* Use hero_image_url for the main image */}
+                {post.hero_image_url && (
                   <Link to={`/blog/${post.slug}`} className="block aspect-video overflow-hidden rounded-t-lg">
                     <img
-                      src={post.image_url}
+                      src={post.hero_image_url}
                       alt={post.title}
                       className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                     />
@@ -62,14 +63,18 @@ const BlogIndex: React.FC = () => {
                   <CardTitle className="font-playfair text-xl text-claryon-gray hover:text-claryon-teal transition-colors">
                     <Link to={`/blog/${post.slug}`}>{post.title}</Link>
                   </CardTitle>
-                  {/* Use post.author (updated from post.author_name) */}
-                  {post.author && <p className="text-sm text-gray-500 pt-1">By {post.author}</p>}
-                  <p className="text-xs text-gray-400 pt-1">
-                    Published: {new Date(post.published_date).toLocaleDateString()}
-                  </p>
+                  {/* Use author_name */}
+                  {post.author_name && <p className="text-sm text-gray-500 pt-1">By {post.author_name}</p>}
+                  {/* Use publication_date and ensure it's not null before formatting */}
+                  {post.publication_date && (
+                    <p className="text-xs text-gray-400 pt-1">
+                      Published: {new Date(post.publication_date).toLocaleDateString()}
+                    </p>
+                  )}
                 </CardHeader>
                 <CardContent className="flex-grow">
-                  <p className="text-gray-700 text-sm line-clamp-3">{post.summary}</p>
+                  {/* Use introduction for the summary */}
+                  <p className="text-gray-700 text-sm line-clamp-3">{post.introduction}</p>
                 </CardContent>
                 <CardFooter className="pt-4">
                   <Button asChild variant="link" className="text-claryon-teal hover:text-claryon-dark-teal p-0">
