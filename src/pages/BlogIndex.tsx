@@ -1,29 +1,30 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// Link, useBlogPosts, Card components, Button are no longer needed for the iframe version.
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { useBlogPosts } from '@/hooks/useBlogPosts'; // Now uses Supabase with updated Post type
-import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 
 /**
  * BlogIndex Page Component
  *
- * This page displays a list of blog posts fetched from Supabase.
- * It uses the `useBlogPosts` hook.
- *
- * TODO:
- * - Consider adding pagination if the number of blog posts grows significantly.
- * - Potentially add filtering or categorization options by 'tags'.
+ * This page displays the company blog by embedding a Google Site.
+ * It previously fetched posts from Supabase but has been updated to use an iframe.
  */
 const BlogIndex: React.FC = () => {
-  const { data: posts, isLoading, error } = useBlogPosts();
+  // Removed useBlogPosts hook and related state (posts, isLoading, error)
+
+  // Calculate approximate height for the iframe to fill most of the viewport
+  // Assuming header height is approx 80px (h-20) and footer is similar or less.
+  // A common approach is 100vh - (header_height + footer_height + some_padding).
+  // Let's use a simpler approach for now and make it mostly viewport height,
+  // but allow scrolling within the iframe itself.
+  // The container div will try to respect this height.
+  const iframeContainerHeight = 'calc(100vh - 160px)'; // Adjust 160px based on actual header/footer/padding
 
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="flex-grow container mx-auto px-4 py-12">
-        <section className="text-center mb-12">
+      <main className="flex-grow container mx-auto px-4 py-8 flex flex-col items-center"> {/* Centering content */}
+        <section className="text-center mb-8 w-full"> {/* Reduced bottom margin */}
           <h1 className="font-playfair text-4xl md:text-5xl font-bold text-claryon-gray mb-4">
             Our Insights & News
           </h1>
@@ -32,65 +33,35 @@ const BlogIndex: React.FC = () => {
           </p>
         </section>
 
-        {isLoading && (
-          <div className="text-center py-10">
-            <p className="text-lg text-claryon-gray">Loading blog posts...</p>
-            {/* You could add a more sophisticated spinner or skeleton loader here */}
+        {/* Iframe section for embedding Google Site */}
+        <section className="w-full flex-grow flex flex-col items-stretch">
+          {/*
+            The outer div helps in defining the area for the iframe.
+            Using flex-grow on this section and its parent main allows it to take available vertical space.
+            The height style on the div below is one way to control iframe height; another is aspect ratio.
+            For a full-page feel iframe, ensuring parent elements can stretch is key.
+            Here, min-height on the iframe itself ensures it's at least substantial.
+          */}
+          <div
+            style={{
+              width: '100%',
+              height: iframeContainerHeight, // Use calculated height
+              minHeight: '600px', // Ensure a minimum sensible height
+              overflow: 'hidden', // Optional: hide scrollbars of this div if iframe handles its own
+              border: '1px solid #e2e8f0', // Optional: subtle border around iframe
+              borderRadius: '0.5rem', // Optional: rounded corners
+            }}
+            className="shadow-lg" // Optional: add some shadow
+          >
+            <iframe
+              src="https://sites.google.com/claryongroup.com/testimonials/blogs"
+              style={{ width: '100%', height: '100%', border: 'none' }}
+              title="Claryon Group Blogs"
+              // Consider adding sandbox attributes for security if applicable, though for Google Sites it's generally trusted.
+              // sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+            ></iframe>
           </div>
-        )}
-
-        {error && (
-          <div className="text-center py-10">
-            <p className="text-lg text-red-600">Error loading blog posts: {error.message}</p>
-          </div>
-        )}
-
-        {!isLoading && !error && posts && posts.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {posts.map((post) => (
-              <Card key={post.id} className="flex flex-col shadow-lg hover:shadow-xl transition-shadow duration-300 bg-white">
-                {/* Use hero_image_url for the main image */}
-                {post.hero_image_url && (
-                  <Link to={`/blog/${post.slug}`} className="block aspect-video overflow-hidden rounded-t-lg">
-                    <img
-                      src={post.hero_image_url}
-                      alt={post.title}
-                      className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                    />
-                  </Link>
-                )}
-                <CardHeader className="pb-4">
-                  <CardTitle className="font-playfair text-xl text-claryon-gray hover:text-claryon-teal transition-colors">
-                    <Link to={`/blog/${post.slug}`}>{post.title}</Link>
-                  </CardTitle>
-                  {/* Use author_name */}
-                  {post.author_name && <p className="text-sm text-gray-500 pt-1">By {post.author_name}</p>}
-                  {/* Use publication_date and ensure it's not null before formatting */}
-                  {post.publication_date && (
-                    <p className="text-xs text-gray-400 pt-1">
-                      Published: {new Date(post.publication_date).toLocaleDateString()}
-                    </p>
-                  )}
-                </CardHeader>
-                <CardContent className="flex-grow">
-                  {/* Use introduction for the summary */}
-                  <p className="text-gray-700 text-sm line-clamp-3">{post.introduction}</p>
-                </CardContent>
-                <CardFooter className="pt-4">
-                  <Button asChild variant="link" className="text-claryon-teal hover:text-claryon-dark-teal p-0">
-                    <Link to={`/blog/${post.slug}`}>Read More &rarr;</Link>
-                  </Button>
-                </CardFooter>
-              </Card>
-            ))}
-          </div>
-        )}
-
-        {!isLoading && !error && (!posts || posts.length === 0) && (
-          <div className="text-center py-10">
-            <p className="text-lg text-claryon-gray">No blog posts available at the moment. Please check back soon!</p>
-          </div>
-        )}
+        </section>
       </main>
       <Footer />
     </div>
