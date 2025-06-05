@@ -31,9 +31,9 @@ export const useBlogPosts = () => {
           title,
           slug,
           publication_date,
-          introduction,     insectesad of summary
-          hero_image_url,  instead of image_url
-          author_name,     instead of author
+          introduction,
+          hero_image_url,
+          author_name,
           tags,
           status
         `) // Select columns aligned with the Post interface for list view
