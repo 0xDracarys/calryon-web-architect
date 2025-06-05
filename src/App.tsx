@@ -19,6 +19,7 @@ import BlogIndex from "./pages/BlogIndex";
 import BlogPostDetail from "./pages/BlogPostDetail";
 import TestimonialsPage from "./pages/TestimonialsPage";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TemporaryBookingPage from "./pages/TemporaryBookingPage"; // Added import
 
 // Admin Context and Components
 import { AdminAuthProvider } from "./contexts/AdminAuthContext";
@@ -56,6 +57,7 @@ const App = () => (
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/book-appointment" element={<BookAppointment />} />
+          <Route path="/temporary-booking" element={<TemporaryBookingPage />} /> {/* Added new route */}
           <Route path="/services/legal" element={<LegalServices />} />
           <Route path="/services/hr" element={<HRServices />} />
           <Route path="/services/education-consulting" element={<EducationConsulting />} />
