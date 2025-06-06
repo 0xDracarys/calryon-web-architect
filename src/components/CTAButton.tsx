@@ -21,12 +21,12 @@ const CTAButton: React.FC<CTAButtonProps> = ({
   showArrow = true,
   className = '' 
 }) => {
-  const baseClasses = 'font-medium transition-all duration-200 hover:transform hover:scale-105';
+  const baseClasses = 'font-medium';
   
   const variantClasses = {
-    primary: 'bg-claryon-teal hover:bg-claryon-teal/90 text-white shadow-lg hover:shadow-xl',
-    secondary: 'bg-white hover:bg-gray-50 text-claryon-teal border-2 border-claryon-teal',
-    outline: 'border-2 border-claryon-teal text-claryon-teal hover:bg-claryon-teal hover:text-white'
+    primary: 'bg-claryon-teal text-white shadow-lg',
+    secondary: 'bg-white text-claryon-teal border-2 border-claryon-teal',
+    outline: 'bg-transparent border-2 border-claryon-teal text-claryon-teal hover:bg-transparent hover:border-claryon-teal hover:text-claryon-teal'
   };
 
   const sizeClasses = {
