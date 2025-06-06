@@ -91,7 +91,7 @@ const Header = () => {
           <div className="hidden lg:flex items-center space-x-4">
             <Button 
               asChild
-              className="bg-claryon-teal text-white px-6 py-2.5 rounded-lg font-medium transition-all duration-200"
+              className="bg-claryon-teal text-white px-6 py-2.5 rounded-lg font-medium"
             >
               <Link to="/book-appointment">Book Consultation</Link>
             </Button>

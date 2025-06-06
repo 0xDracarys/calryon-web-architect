@@ -1,4 +1,4 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "default-src 'self'; frame-src 'self' https://sites.google.com; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; object-src 'none';"
+    Content-Security-Policy = "frame-src https://sites.google.com; child-src https://sites.google.com;"
