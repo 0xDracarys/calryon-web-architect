@@ -184,7 +184,7 @@ const Contact = () => {
 
                     <Button 
                       type="submit" 
-                      className="w-full bg-claryon-teal hover:bg-claryon-teal/90"
+                      className="w-full bg-claryon-teal hover:bg-claryon-teal/90 text-white"
                       disabled={isSubmitting}
                     >
                       {isSubmitting ? 'Sending...' : 'Send Message'}
