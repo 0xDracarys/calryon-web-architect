@@ -91,7 +91,7 @@ const Header = () => {
           <div className="hidden lg:flex items-center space-x-4">
             <Button 
               asChild
-              className="bg-claryon-teal hover:bg-claryon-dark-teal text-white px-6 py-2.5 rounded-lg font-medium transition-all duration-200"
+              className="bg-claryon-teal text-white px-6 py-2.5 rounded-lg font-medium transition-all duration-200"
             >
               <Link to="/book-appointment">Book Consultation</Link>
             </Button>
@@ -152,7 +152,7 @@ const Header = () => {
                 <Button 
                   asChild
                   size="lg"
-                  className="bg-claryon-teal hover:bg-claryon-dark-teal text-white w-full mt-4"
+                  className="bg-claryon-teal text-white w-full mt-4"
                 >
                   <Link to="/book-appointment" onClick={() => setIsOpen(false)}>
                     Book Consultation
