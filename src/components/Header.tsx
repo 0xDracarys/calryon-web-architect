@@ -21,8 +21,8 @@ const Header = () => {
         { name: 'Business Consulting', href: '/services/business-consulting' },
       ]
     },
-    { name: 'Blog', href: '/blog' },
-    { name: 'Testimonials', href: '/testimonials' },
+    { name: 'Blog', href: 'https://sites.google.com/claryongroup.com/testimonials/blogs', isExternal: true },
+    { name: 'Testimonials', href: 'https://sites.google.com/claryongroup.com/testimonials/testimonials', isExternal: true },
     { name: 'Contact', href: '/contact' },
     // New link for Temporary Booking
     { name: 'Temp Booking', href: '/temporary-booking' },
@@ -53,27 +53,38 @@ const Header = () => {
           </Link>
 
           <nav className="hidden lg:flex items-center space-x-8">
-            {navItems.map((item) => (
+            {navItems.map((item: any) => (
               <div key={item.name} className="relative group">
-                <Link
-                  to={item.href}
-                  className={`text-sm font-medium transition-colors duration-200 ${
-                    // Use isServicesActive for the main "Services" link, otherwise use isActive
-                    item.name === 'Services' ? (isServicesActive(item.href) ? 'text-claryon-teal' : 'text-claryon-gray hover:text-claryon-teal')
-                                             : (isActive(item.href) ? 'text-claryon-teal' : 'text-claryon-gray hover:text-claryon-teal')
-                  }`}
-                >
-                  {item.name}
-                </Link>
+                {item.isExternal ? (
+                  <a
+                    href={item.href!}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`text-sm font-medium transition-colors duration-200 text-claryon-gray hover:text-claryon-teal`}
+                  >
+                    {item.name}
+                  </a>
+                ) : (
+                  <Link
+                    to={item.href!}
+                    className={`text-sm font-medium transition-colors duration-200 ${
+                      // Use isServicesActive for the main "Services" link, otherwise use isActive
+                      item.name === 'Services' ? (isServicesActive(item.href!) ? 'text-claryon-teal' : 'text-claryon-gray hover:text-claryon-teal')
+                                               : (isActive(item.href!) ? 'text-claryon-teal' : 'text-claryon-gray hover:text-claryon-teal')
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
+                )}
                 {item.submenu && (
                   <div className="absolute left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10">
                     <div className="py-2">
-                      {item.submenu.map((subItem) => (
+                      {item.submenu.map((subItem: any) => (
                         <Link
                           key={subItem.name}
-                          to={subItem.href}
+                          to={subItem.href!}
                           className={`block px-4 py-3 text-sm transition-colors duration-200 ${
-                            isActive(subItem.href)
+                            isActive(subItem.href!)
                             ? 'text-claryon-teal bg-claryon-teal/5'
                             : 'text-claryon-gray hover:text-claryon-teal hover:bg-gray-50'
                           }`}
@@ -113,30 +124,42 @@ const Header = () => {
                   />
                 </Link>
                 <nav className="flex flex-col space-y-2">
-                  {navItems.map((item) => (
+                  {navItems.map((item: any) => (
                     <div key={item.name}>
-                      <Link
-                        to={item.href}
-                        onClick={() => {
-                          // Close sheet if it's not a parent of a submenu or if it is a submenu item itself
-                          if (!item.submenu) setIsOpen(false);
-                        }}
-                        className={`block py-2 text-base font-medium transition-colors duration-200 rounded-md px-3 ${
-                          item.name === 'Services' ? (isServicesActive(item.href) ? 'text-claryon-teal bg-claryon-teal/10' : 'text-claryon-gray hover:text-claryon-teal hover:bg-gray-100')
-                                                   : (isActive(item.href) ? 'text-claryon-teal bg-claryon-teal/10' : 'text-claryon-gray hover:text-claryon-teal hover:bg-gray-100')
-                        }`}
-                      >
-                        {item.name}
-                      </Link>
+                      {item.isExternal ? (
+                        <a
+                          href={item.href!}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={() => setIsOpen(false)}
+                          className={`block py-2 text-base font-medium transition-colors duration-200 rounded-md px-3 text-claryon-gray hover:text-claryon-teal hover:bg-gray-100`}
+                        >
+                          {item.name}
+                        </a>
+                      ) : (
+                        <Link
+                          to={item.href!}
+                          onClick={() => {
+                            // Close sheet if it's not a parent of a submenu or if it is a submenu item itself
+                            if (!item.submenu) setIsOpen(false);
+                          }}
+                          className={`block py-2 text-base font-medium transition-colors duration-200 rounded-md px-3 ${
+                            item.name === 'Services' ? (isServicesActive(item.href!) ? 'text-claryon-teal bg-claryon-teal/10' : 'text-claryon-gray hover:text-claryon-teal hover:bg-gray-100')
+                                                     : (isActive(item.href!) ? 'text-claryon-teal bg-claryon-teal/10' : 'text-claryon-gray hover:text-claryon-teal hover:bg-gray-100')
+                          }`}
+                        >
+                          {item.name}
+                        </Link>
+                      )}
                       {item.submenu && (
                         <div className="ml-4 mt-1 space-y-1 border-l border-gray-200 pl-3">
-                          {item.submenu.map((subItem) => (
+                          {item.submenu.map((subItem: any) => (
                             <Link
                               key={subItem.name}
-                              to={subItem.href}
+                              to={subItem.href!}
                               onClick={() => setIsOpen(false)} // Submenu items always close sheet
                               className={`block py-2 text-sm transition-colors duration-200 rounded-md px-3 ${
-                                isActive(subItem.href)
+                                isActive(subItem.href!)
                                 ? 'text-claryon-teal bg-claryon-teal/10'
                                 : 'text-gray-600 hover:text-claryon-teal hover:bg-gray-100'
                               }`}
