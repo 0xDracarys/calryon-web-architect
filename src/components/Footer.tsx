@@ -11,8 +11,8 @@ const Footer = () => {
           {/* Company Info */}
           <div className="space-y-4">
             <img 
-              src="/lovable-uploads/00163a20-59c4-4a42-89b2-bb49df4a4061.png" 
-              alt="Claryon Group" 
+              src="/new_logo.png"
+              alt="Claryon Group Logo"
               className="h-10 w-auto filter brightness-0 invert"
             />
             <p className="text-gray-300 text-sm">
