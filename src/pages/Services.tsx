@@ -23,15 +23,13 @@ const Services = () => {
       icon: <Scale className="h-8 w-8 text-claryon-teal" />
     },
     {
-      title: "HR Services",
-      description: "Strategic human resources solutions to optimize your workforce and ensure compliance.",
+      title: "HR Solutions",
+      description: "Strategic HR support for both employers and job seekers—helping businesses build strong teams and individuals find meaningful careers in Europe.",
       features: [
         "Recruitment & Talent Acquisition",
-        "Employee Relations",
-        "HR Policy Development",
-        "Performance Management",
-        "Compensation & Benefits",
-        "Training & Development"
+        "Job Placement Across the EU",
+        "Employee Relations & Support",
+        "HR Policy & Compliance Consulting"
       ],
       href: "/services/hr",
       icon: <Users className="h-8 w-8 text-claryon-teal" />
