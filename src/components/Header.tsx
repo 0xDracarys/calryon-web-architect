@@ -10,13 +10,13 @@ const Header = () => {
 
   const navItems = [
     { name: 'Home', href: '/' },
-    { name: 'About', href: '/about' },
+    { name: 'About Us', href: '/about' },
     {
       name: 'Services',
       href: '/services',
       submenu: [
         { name: 'Legal Services', href: '/services/legal' },
-        { name: 'HR Services', href: '/services/hr' },
+        { name: 'HR Solutions', href: '/services/hr' },
         { name: 'Education Consulting', href: '/services/education-consulting' },
         { name: 'Business Consulting', href: '/services/business-consulting' },
       ]
@@ -25,7 +25,7 @@ const Header = () => {
     { name: 'Testimonials', href: 'https://sites.google.com/claryongroup.com/testimonials/testimonials', isExternal: true },
     { name: 'Contact', href: '/contact' },
     // New link for Temporary Booking
-    { name: 'Temp Booking', href: '/temporary-booking' },
+    { name: 'Temp Booking', href: 'https://sites.google.com/claryongroup.com/testimonials/appointment', isExternal: true },
   ];
 
   const isActive = (href: string) => {
@@ -46,7 +46,7 @@ const Header = () => {
         <div className="flex justify-between items-center h-20">
           <Link to="/" className="flex items-center space-x-3" onClick={() => setIsOpen(false)}>
             <img 
-              src="/lovable-uploads/00163a20-59c4-4a42-89b2-bb49df4a4061.png" 
+              src="/new_logo.png"
               alt="Claryon Group Logo"
               className="h-12 w-auto"
             />
@@ -118,7 +118,7 @@ const Header = () => {
               <div className="flex flex-col space-y-6 mt-2">
                 <Link to="/" className="mb-4" onClick={() => setIsOpen(false)}>
                   <img
-                    src="/lovable-uploads/00163a20-59c4-4a42-89b2-bb49df4a4061.png"
+                    src="/new_logo.png"
                     alt="Claryon Group Logo"
                     className="h-10 w-auto"
                   />
