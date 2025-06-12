@@ -12,7 +12,7 @@ import Contact from "./pages/Contact";
 import BookAppointment from "./pages/BookAppointment";
 import NotFound from "./pages/NotFound";
 import LegalServices from "./pages/LegalServices";
-import HRServices from "./pages/HRServices";
+import HRSolutions from "./pages/HRSolutions";
 import EducationConsulting from "./pages/EducationConsulting";
 import BusinessConsulting from "./pages/BusinessConsulting";
 import BlogIndex from "./pages/BlogIndex";
@@ -59,7 +59,7 @@ const App = () => (
           <Route path="/book-appointment" element={<BookAppointment />} />
           <Route path="/temporary-booking" element={<TemporaryBookingPage />} /> {/* Added new route */}
           <Route path="/services/legal" element={<LegalServices />} />
-          <Route path="/services/hr" element={<HRServices />} />
+          <Route path="/services/hr" element={<HRSolutions />} />
           <Route path="/services/education-consulting" element={<EducationConsulting />} />
           <Route path="/services/business-consulting" element={<BusinessConsulting />} />
           <Route path="/blog" element={<BlogIndex />} />

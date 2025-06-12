@@ -10,20 +10,20 @@ import Footer from '@/components/Footer';
  *
  * Current version: Placeholder content.
  *
- * TODO: Integrate with Wagtail API to display dynamic content for HR Services.
+ * TODO: Integrate with Wagtail API to display dynamic content for HR Solutions.
  *       This page should detail services like recruitment, employee relations, policy development, etc.
  */
-const HRServices: React.FC = () => {
+const HRSolutions: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-grow container mx-auto px-4 py-12">
         <section className="text-center mb-12">
           <h1 className="font-playfair text-4xl md:text-5xl font-bold text-claryon-gray mb-4">
-            Human Resources Services
+            Human Resources Solutions
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Strategic HR solutions to build, manage, and optimize your workforce effectively.
+            Strategic HR support for both employers and job seekers-helping businesses build strong teams and individuals find meaningful careers in Europe.
           </p>
         </section>
 
@@ -41,26 +41,25 @@ const HRServices: React.FC = () => {
             </div>
 
             <div>
-              <h3 className="text-xl font-semibold text-claryon-teal mb-2">Employee Relations</h3>
+              <h3 className="text-xl font-semibold text-claryon-teal mb-2">Job Placement Across the EU</h3>
               <p className="text-gray-700">
-                Fostering a positive and productive work environment. We offer expertise in conflict resolution, performance management,
-                and employee engagement strategies.
+                Expert assistance for individuals seeking job opportunities and employers looking to fill roles across European Union countries.
                 {/* TODO: Add more detailed content from Wagtail here */}
               </p>
             </div>
 
             <div>
-              <h3 className="text-xl font-semibold text-claryon-teal mb-2">HR Policy Development</h3>
+              <h3 className="text-xl font-semibold text-claryon-teal mb-2">Employee Relations & Support</h3>
               <p className="text-gray-700">
-                Crafting and implementing HR policies that are compliant with local regulations and aligned with your business objectives.
+                Providing support for both employers and employees in fostering positive workplace relationships, conflict resolution, and ensuring fair treatment.
                 {/* TODO: Add more detailed content from Wagtail here */}
               </p>
             </div>
 
             <div>
-              <h3 className="text-xl font-semibold text-claryon-teal mb-2">Performance Management Systems</h3>
+              <h3 className="text-xl font-semibold text-claryon-teal mb-2">HR Policy & Compliance Consulting</h3>
               <p className="text-gray-700">
-                Designing and implementing effective performance appraisal and management systems to drive employee growth and productivity.
+                Developing and implementing HR policies that align with business objectives and comply with European labor laws and regulations.
                 {/* TODO: Add more detailed content from Wagtail here */}
               </p>
             </div>
@@ -81,4 +80,4 @@ const HRServices: React.FC = () => {
   );
 };
 
-export default HRServices;
+export default HRSolutions;
