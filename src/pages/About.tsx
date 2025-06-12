@@ -192,7 +192,7 @@ const About = () => {
             Discover how our expertise can help you achieve your goals. Let's start the conversation.
           </p>
           <CTAButton to="/book-appointment" variant="secondary" size="lg">
-            Book Your Consultation
+            Book Your FREE Consultation
           </CTAButton>
         </div>
       </section>

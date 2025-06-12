@@ -38,9 +38,14 @@ const Index = () => {
       icon: <Scale className="h-8 w-8 text-claryon-teal" />
     },
     {
-      title: "HR Services",
-      description: "Strategic human resources solutions to optimize your workforce and ensure compliance.",
-      features: ["Recruitment & Talent Acquisition", "Employee Relations", "HR Policy Development", "Performance Management"],
+      title: "HR Solutions",
+      description: "Strategic HR support for both employers and job seekers-helping businesses build strong teams and individuals find meaningful careers in Europe.",
+      features: [
+          "Recruitment & Talent Acquisition",
+          "Job Placement Across the EU",
+          "Employee Relations & Support",
+          "HR Policy & Compliance Consulting"
+        ],
       href: "/services/hr",
       icon: <Users className="h-8 w-8 text-claryon-teal" />
     },
@@ -73,15 +78,14 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="font-playfair text-4xl md:text-5xl lg:text-6xl font-bold text-claryon-gray mb-6 animate-fade-in">
-              Professional Consulting Services
-              <span className="block text-claryon-teal">Across Europe & Beyond</span>
+              Empowering
+              <span className="block text-claryon-teal">YOU</span>
             </h1>
             <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-              Expert guidance in legal, HR, education, and business consulting. 
-              We help individuals and organizations navigate complex challenges with confidence and clarity.
+              With Clarity and Confidence when you need it the most. We support individuals and organizations with expert guidance in legal, HR, education, and business consulting.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <CTAButton to="/book-appointment" size="lg">Book Your Consultation</CTAButton>
+              <CTAButton to="/book-appointment" size="lg">Book Your FREE Consultation</CTAButton>
               <CTAButton to="/services" variant="outline" size="lg">Explore Our Services</CTAButton>
             </div>
           </div>
@@ -159,7 +163,7 @@ const Index = () => {
           <div className="text-center mb-16">
             <h2 className="font-playfair text-3xl md:text-4xl font-bold text-claryon-gray mb-4">Why Choose Claryon Group?</h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Our commitment to excellence, transparency, and client success sets us apart in the consulting industry.
+              Our dedication to clarity, collaboration, and client success makes us a trusted partner for individuals and businesses navigating legal, HR, education, and consulting challenges
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -168,21 +172,21 @@ const Index = () => {
                 <Scale className="h-8 w-8 text-white" />
               </div>
               <h3 className="font-playfair text-xl font-semibold text-claryon-gray mb-2">Expertise</h3>
-              <p className="text-gray-600">Deep knowledge across legal, HR, education, and business domains.</p>
+              <p className="text-gray-600">Comprehensive knowledge in EU law, recruitment, global education, and business strategy-tailored for each client's unique journey.</p>
             </div>
             <div className="text-center p-6 border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow">
               <div className="w-16 h-16 bg-claryon-teal rounded-full flex items-center justify-center mx-auto mb-4">
                 <Users className="h-8 w-8 text-white" />
               </div>
-              <h3 className="font-playfair text-xl font-semibold text-claryon-gray mb-2">Trust</h3>
-              <p className="text-gray-600">Transparent communication and ethical practices in every engagement.</p>
+              <h3 className="font-playfair text-xl font-semibold text-claryon-gray mb-2">Integrity & Trust</h3>
+              <p className="text-gray-600">We lead with transparency and fairness ensuring every interaction is grounded in honesty, respect, and ethical practice.</p>
             </div>
             <div className="text-center p-6 border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow">
               <div className="w-16 h-16 bg-claryon-teal rounded-full flex items-center justify-center mx-auto mb-4">
                 <TrendingUp className="h-8 w-8 text-white" />
               </div>
-              <h3 className="font-playfair text-xl font-semibold text-claryon-gray mb-2">Results</h3>
-              <p className="text-gray-600">Proven track record of successful outcomes for our clients.</p>
+              <h3 className="font-playfair text-xl font-semibold text-claryon-gray mb-2">Real Results</h3>
+              <p className="text-gray-600">A strong track record of helping companies grow, professionals thrive, and students succeed across Europe.</p>
             </div>
           </div>
         </div>
@@ -248,9 +252,9 @@ const Index = () => {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="font-playfair text-3xl md:text-4xl font-bold text-white mb-4">Ready to Get Started?</h2>
           <p className="text-xl text-white/90 mb-8">
-            Take the first step towards achieving your goals. Book a consultation with our expert team today.
+            No matter where you are in your journey, we're ready to support you with expert advice and practical solutions.
           </p>
-          <CTAButton to="/book-appointment" variant="secondary" size="lg">Schedule Your Consultation</CTAButton>
+          <CTAButton to="/book-appointment" variant="secondary" size="lg">Book Your Free Consultation</CTAButton>
         </div>
       </section>
 

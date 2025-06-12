@@ -44,7 +44,7 @@ const Header = () => {
     <header className="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          <Link to="/" className="flex items-center space-x-3" onClick={() => setIsOpen(false)}>
+          <a href="https://drive.google.com/file/d/1OE6kDWnhzA4005eBc7F8e6YrbGtnxIOD/view?usp=drive_link" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3" onClick={() => setIsOpen(false)}>
             <img 
               src="/new_logo.png"
               alt="Claryon Group Logo"
@@ -104,7 +104,7 @@ const Header = () => {
               asChild
               className="bg-claryon-teal text-white px-6 py-2.5 rounded-lg font-medium"
             >
-              <Link to="/book-appointment">Book Consultation</Link>
+              <Link to="/book-appointment">Book Your FREE Consultation</Link>
             </Button>
           </div>
 
@@ -178,7 +178,7 @@ const Header = () => {
                   className="bg-claryon-teal text-white w-full mt-4"
                 >
                   <Link to="/book-appointment" onClick={() => setIsOpen(false)}>
-                    Book Consultation
+                    Book Your FREE Consultation
                   </Link>
                 </Button>
               </div>
