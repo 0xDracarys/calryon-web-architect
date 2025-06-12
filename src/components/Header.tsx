@@ -46,7 +46,7 @@ const Header = () => {
         <div className="flex justify-between items-center h-20">
           <a href="https://drive.google.com/file/d/1OE6kDWnhzA4005eBc7F8e6YrbGtnxIOD/view?usp=drive_link" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3" onClick={() => setIsOpen(false)}>
             <img 
-              src="https://asset.cloudinary.com/dq03afeam/571363048079157f8a5c33b7434a1fae"
+              src="https://raw.githubusercontent.com/0xDracarys/calryon-web-architect/main/00%20CLARYON%20PSD.svg"
               alt="Claryon Group Logo"
               className="h-12 w-auto"
             />
@@ -118,7 +118,7 @@ const Header = () => {
               <div className="flex flex-col space-y-6 mt-2">
                 <Link to="/" className="mb-4" onClick={() => setIsOpen(false)}>
                   <img
-                    src="https://asset.cloudinary.com/dq03afeam/571363048079157f8a5c33b7434a1fae"
+                    src="https://raw.githubusercontent.com/0xDracarys/calryon-web-architect/main/00%20CLARYON%20PSD.svg"
                     alt="Claryon Group Logo"
                     className="h-10 w-auto"
                   />
