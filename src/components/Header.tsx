@@ -50,7 +50,7 @@ const Header = () => {
               alt="Claryon Group Logo"
               className="h-12 w-auto"
             />
-          </Link>
+          </a>
 
           <nav className="hidden lg:flex items-center space-x-8">
             {navItems.map((item: any) => (
