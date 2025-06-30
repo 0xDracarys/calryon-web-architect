@@ -93,14 +93,14 @@ const Footer = () => {
               <div className="flex items-start space-x-3">
                 <MapPin className="h-4 w-4 mt-1 text-claryon-teal flex-shrink-0" />
                 <span className="text-gray-300">
-                  123 Business Street<br />
-                  Professional District<br />
-                  City, Country 12345
+                  K. Donelaičio g. 33<br />
+                  Kaunas, 44240 Kauno m sav<br />
+                  Lithuania
                 </span>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="h-4 w-4 text-claryon-teal flex-shrink-0" />
-                <span className="text-gray-300">+1 (555) 123-4567</span>
+                <span className="text-gray-300">+37061408538</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="h-4 w-4 text-claryon-teal flex-shrink-0" />
