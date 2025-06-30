@@ -206,9 +206,9 @@ const Contact = () => {
                     <div>
                       <h3 className="font-semibold text-claryon-gray">Office Address</h3>
                       <p className="text-gray-600">
-                        123 Business Street<br />
-                        Professional District<br />
-                        City, Country 12345
+                        K. Donelaičio g. 33<br />
+                        Kaunas, 44240 Kauno m sav<br />
+                        Lithuania
                       </p>
                     </div>
                   </div>
@@ -217,7 +217,7 @@ const Contact = () => {
                     <Phone className="h-6 w-6 text-claryon-teal mt-1 flex-shrink-0" />
                     <div>
                       <h3 className="font-semibold text-claryon-gray">Phone</h3>
-                      <p className="text-gray-600">+1 (555) 123-4567</p>
+                      <p className="text-gray-600">+37061408538</p>
                       <a 
                         href="https://wa.me/1234567890" 
                         target="_blank" 

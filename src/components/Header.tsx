@@ -44,13 +44,11 @@ const Header = () => {
     <header className="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          <a href="https://drive.google.com/file/d/1OE6kDWnhzA4005eBc7F8e6YrbGtnxIOD/view?usp=drive_link" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3" onClick={() => setIsOpen(false)}>
-            <img 
-              src="https://raw.githubusercontent.com/0xDracarys/calryon-web-architect/main/00%20CLARYON%20PSD.svg"
-              alt="Claryon Group Logo"
-              className="h-12 w-auto"
-            />
-          </a>
+          <Link to="/" className="flex items-center" onClick={() => setIsOpen(false)}>
+            <span className="font-playfair text-3xl font-bold" style={{ color: '#1B6E7E' }}>
+              Claryon Group
+            </span>
+          </Link>
 
           <nav className="hidden lg:flex items-center space-x-8">
             {navItems.map((item: any) => (
@@ -117,11 +115,9 @@ const Header = () => {
             <SheetContent side="right" className="w-full max-w-xs sm:max-w-sm p-6">
               <div className="flex flex-col space-y-6 mt-2">
                 <Link to="/" className="mb-4" onClick={() => setIsOpen(false)}>
-                  <img
-                    src="https://raw.githubusercontent.com/0xDracarys/calryon-web-architect/main/00%20CLARYON%20PSD.svg"
-                    alt="Claryon Group Logo"
-                    className="h-10 w-auto"
-                  />
+                  <span className="font-playfair text-2xl font-bold" style={{ color: '#1B6E7E' }}>
+                    Claryon Group
+                  </span>
                 </Link>
                 <nav className="flex flex-col space-y-2">
                   {navItems.map((item: any) => (
