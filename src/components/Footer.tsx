@@ -10,11 +10,11 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="space-y-4">
-            <img 
-              src="/new_logo.png"
-              alt="Claryon Group Logo"
-              className="h-10 w-auto filter brightness-0 invert"
-            />
+            <Link to="/" className="flex items-center">
+              <span className="font-playfair text-2xl font-bold" style={{ color: '#1B6E7E' }}>
+                Claryon Group
+              </span>
+            </Link>
             <p className="text-gray-300 text-sm">
               Professional consulting services across Europe and non-EU countries. 
               Expert guidance in legal, HR, education, and business matters.
