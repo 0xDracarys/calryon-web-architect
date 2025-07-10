@@ -78,8 +78,7 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="font-playfair text-4xl md:text-5xl lg:text-6xl font-bold text-claryon-gray mb-6 animate-fade-in">
-              Empowering
-              <span className="block text-claryon-teal">YOU</span>
+              Empowering <span className="inline text-claryon-teal">YOU</span>
             </h1>
             <p className="text-xl text-gray-600 mb-8 leading-relaxed">
               With Clarity and Confidence when you need it the most. We support individuals and organizations with expert guidance in legal, HR, education, and business consulting.
@@ -148,9 +147,9 @@ const Index = () => {
               ))}
             </div>
           )}
-          {!blogPostsLoading && !blogPostsError && previewBlogPosts.length === 0 && (
+          {/* {!blogPostsLoading && !blogPostsError && previewBlogPosts.length === 0 && (
             <p className="text-center text-claryon-gray py-4">No blog posts available yet. Check back soon!</p>
-          )}
+          )} */}
           <div className="text-center mt-12">
             <CTAButton to="/blog" variant="outline">View All Articles</CTAButton>
           </div>
@@ -196,7 +195,7 @@ const Index = () => {
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="font-playfair text-3xl md:text-4xl font-bold text-claryon-gray mb-4">Client Success Stories</h2>
+            <h2 className="font-playfair text-3xl md:text-4xl font-bold text-claryon-gray mb-4">Success Stories</h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               Hear from our satisfied clients who have achieved their goals with our expert guidance.
             </p>
@@ -238,11 +237,18 @@ const Index = () => {
               ))}
             </div>
           )}
-           {!testimonialsLoading && !testimonialsError && previewTestimonials.length === 0 && (
+           {/* {!testimonialsLoading && !testimonialsError && previewTestimonials.length === 0 && (
              <p className="text-center text-claryon-gray py-4">No testimonials available yet. Check back soon!</p>
-           )}
+           )} */}
           <div className="text-center mt-12">
-            <CTAButton to="/testimonials" variant="outline">View All Testimonials</CTAButton>
+            <CTAButton
+              to="https://sites.google.com/claryongroup.com/testimonials/testimonials"
+              variant="outline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View All Testimonials
+            </CTAButton>
           </div>
         </div>
       </section>

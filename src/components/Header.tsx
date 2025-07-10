@@ -24,8 +24,7 @@ const Header = () => {
     { name: 'Blog', href: 'https://sites.google.com/claryongroup.com/testimonials/blogs', isExternal: true },
     { name: 'Testimonials', href: 'https://sites.google.com/claryongroup.com/testimonials/testimonials', isExternal: true },
     { name: 'Contact', href: '/contact' },
-    // New link for Temporary Booking
-    { name: 'Temp Booking', href: 'https://sites.google.com/claryongroup.com/testimonials/appointment', isExternal: true },
+    // { name: 'Temp Booking', href: 'https://sites.google.com/claryongroup.com/testimonials/appointment', isExternal: true }, // Removed as per request
   ];
 
   const isActive = (href: string) => {
