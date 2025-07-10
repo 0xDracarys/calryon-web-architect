@@ -78,8 +78,7 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="font-playfair text-4xl md:text-5xl lg:text-6xl font-bold text-claryon-gray mb-6 animate-fade-in">
-              Empowering
-              <span className="block text-claryon-teal">YOU</span>
+              Empowering <span className="inline text-claryon-teal">YOU</span>
             </h1>
             <p className="text-xl text-gray-600 mb-8 leading-relaxed">
               With Clarity and Confidence when you need it the most. We support individuals and organizations with expert guidance in legal, HR, education, and business consulting.
@@ -148,9 +147,9 @@ const Index = () => {
               ))}
             </div>
           )}
-          {!blogPostsLoading && !blogPostsError && previewBlogPosts.length === 0 && (
+          {/* {!blogPostsLoading && !blogPostsError && previewBlogPosts.length === 0 && (
             <p className="text-center text-claryon-gray py-4">No blog posts available yet. Check back soon!</p>
-          )}
+          )} */}
           <div className="text-center mt-12">
             <CTAButton to="/blog" variant="outline">View All Articles</CTAButton>
           </div>
@@ -238,9 +237,9 @@ const Index = () => {
               ))}
             </div>
           )}
-           {!testimonialsLoading && !testimonialsError && previewTestimonials.length === 0 && (
+           {/* {!testimonialsLoading && !testimonialsError && previewTestimonials.length === 0 && (
              <p className="text-center text-claryon-gray py-4">No testimonials available yet. Check back soon!</p>
-           )}
+           )} */}
           <div className="text-center mt-12">
             <CTAButton
               to="https://sites.google.com/claryongroup.com/testimonials/testimonials"
