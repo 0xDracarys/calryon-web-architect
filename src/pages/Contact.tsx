@@ -217,7 +217,7 @@ const Contact = () => {
                     <Phone className="h-6 w-6 text-claryon-teal mt-1 flex-shrink-0" />
                     <div>
                       <h3 className="font-semibold text-claryon-gray">Phone</h3>
-                      <p className="text-gray-600">+37061408538</p>
+                      <p className="text-gray-600">+37062177470</p>
                       <a 
                         href="https://wa.me/1234567890" 
                         target="_blank" 
