@@ -102,7 +102,7 @@ const Header = () => {
               asChild
               className="bg-claryon-teal text-white px-6 py-2.5 rounded-lg font-medium"
             >
-              <Link to="/book-appointment">Book Your FREE Consultation</Link>
+              <a href="https://sites.google.com/claryongroup.com/testimonials/appointment" target="_blank" rel="noopener noreferrer">Book Your FREE Consultation</a>
             </Button>
           </div>
 
@@ -173,9 +173,9 @@ const Header = () => {
                   size="lg"
                   className="bg-claryon-teal text-white w-full mt-4"
                 >
-                  <Link to="/book-appointment" onClick={() => setIsOpen(false)}>
+                  <a href="https://sites.google.com/claryongroup.com/testimonials/appointment" target="_blank" rel="noopener noreferrer" onClick={() => setIsOpen(false)}>
                     Book Your FREE Consultation
-                  </Link>
+                  </a>
                 </Button>
               </div>
             </SheetContent>
