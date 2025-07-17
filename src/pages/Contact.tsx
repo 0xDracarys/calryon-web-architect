@@ -251,19 +251,18 @@ const Contact = () => {
                 </div>
               </div>
 
-              {/* Map Placeholder */}
+              {/* Map */}
               <Card className="border-0 shadow-lg">
-                <CardContent className="p-6">
-                  <h3 className="font-playfair text-xl font-semibold text-claryon-gray mb-4">
-                    Our Location
-                  </h3>
-                  <div className="bg-gray-100 rounded-lg h-64 flex items-center justify-center">
-                    <div className="text-center text-gray-500">
-                      <MapPin className="h-12 w-12 mx-auto mb-2" />
-                      <p>Interactive Map Coming Soon</p>
-                      <p className="text-sm">Embedded Google Maps integration</p>
-                    </div>
-                  </div>
+                <CardContent className="p-0">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2294.595413168925!2d23.90958061589736!3d54.89678098033398!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46e722765d8b3b3b%3A0x4a4b3b3b3b3b3b3b!2sK.%20Donelai%C4%8Dio%20g.%2033%2C%20Kaunas%2044240%2C%20Lithuania!5e0!3m2!1sen!2sus!4v1628428253432!5m2!1sen!2sus"
+                    width="100%"
+                    height="450"
+                    style={{ border: 0 }}
+                    allowFullScreen={true}
+                    loading="lazy"
+                    title="Claryon Group Location"
+                  ></iframe>
                 </CardContent>
               </Card>
             </div>

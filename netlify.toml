@@ -1,4 +1,9 @@
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "frame-src https://sites.google.com; child-src https://sites.google.com;"
+    Content-Security-Policy = "frame-src https://sites.google.com https://www.google.com; child-src https://sites.google.com https://www.google.com;"
