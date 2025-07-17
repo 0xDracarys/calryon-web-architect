@@ -44,9 +44,7 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <Link to="/" className="flex items-center" onClick={() => setIsOpen(false)}>
-            <span className="font-playfair text-3xl font-bold" style={{ color: '#1B6E7E' }}>
-              Claryon Group
-            </span>
+            <img src="https://raw.githubusercontent.com/0xDracarys/claryon-logo/refs/heads/main/CLARYON%2001.png" alt="Claryon Group Logo" className="h-12" />
           </Link>
 
           <nav className="hidden lg:flex items-center space-x-8">
