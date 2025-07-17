@@ -44,7 +44,7 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <Link to="/" className="flex items-center" onClick={() => setIsOpen(false)}>
-            <img src="https://raw.githubusercontent.com/0xDracarys/claryon-logo/refs/heads/main/CLARYON%2001.png" alt="Claryon Group Logo" className="h-12" />
+            <img src="https://github.com/0xDracarys/claryon-logo/blob/main/claryon-edited.png?raw=true" alt="Claryon Group Logo" className="h-16" />
           </Link>
 
           <nav className="hidden lg:flex items-center space-x-8">
@@ -112,9 +112,7 @@ const Header = () => {
             <SheetContent side="right" className="w-full max-w-xs sm:max-w-sm p-6">
               <div className="flex flex-col space-y-6 mt-2">
                 <Link to="/" className="mb-4" onClick={() => setIsOpen(false)}>
-                  <span className="font-playfair text-2xl font-bold" style={{ color: '#1B6E7E' }}>
-                    Claryon Group
-                  </span>
+                  <img src="https://github.com/0xDracarys/claryon-logo/blob/main/claryon-edited.png?raw=true" alt="Claryon Group Logo" className="h-16" />
                 </Link>
                 <nav className="flex flex-col space-y-2">
                   {navItems.map((item: any) => (
